@@ -58,7 +58,16 @@ const state = reactive({
 });
 
 // 初始化 先读缓存，为空则发起请求
-const init = () => {
+const init = async () => {
+    // 判断登录
+    state.loading = true;
+    let resp = await getUserInfo();
+    state.login = !resp.data.err_no && resp.data.data;
+    if (!state.login) {
+        state.loading = false;
+        return;
+    }
+    // 已登录
     chrome.runtime.sendMessage(
         {
             key: "checkStorageSignData",

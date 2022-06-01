@@ -62,7 +62,16 @@ export default {
     },
     methods: {
         // 初始化 先读缓存，为空则发起请求
-        init() {
+        async init() {
+            // 判断登录
+            this.loading = true;
+            let resp = await getUserInfo();
+            this.login = !resp.data.err_no && resp.data.data;
+            if (!this.login) {
+                this.loading = false;
+                return;
+            }
+            // 已登录
             chrome.runtime.sendMessage(
                 {
                     key: "checkStorageSignData",
