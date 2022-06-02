@@ -134,7 +134,7 @@ export default {
             if (resp.data.err_no === 0) {
                 msg = "签到成功";
                 this.$message.success();
-                this.init();
+                this.refresh();
             } else {
                 msg = resp.data.err_msg || "签到失败";
                 this.$message.error(msg);
