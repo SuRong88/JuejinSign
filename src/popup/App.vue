@@ -133,7 +133,7 @@ export default {
             let msg = "";
             if (resp.data.err_no === 0) {
                 msg = "签到成功";
-                this.$message.success();
+                this.$message.success(msg);
                 this.refresh();
             } else {
                 msg = resp.data.err_msg || "签到失败";
